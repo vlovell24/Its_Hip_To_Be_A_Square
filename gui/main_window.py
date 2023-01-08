@@ -119,8 +119,8 @@ class MainWindow(ttk.Window):
             width=30,
             textvariable=self.side_one_stringvar
         )
-        self.side_one.bind("<1>", self.validate_entry_field)
-        self.side_one.bind("<KeyPress>", self.key_press)
+        self.side_one.bind("<1>", self.validate_entry_field)  # bind left mouse button in entry field
+        self.side_one.bind("<KeyPress>", self.key_press)  # bind keypress to entry field for validation
         self.side_two = ttk.Entry(
             self,
             width=30,
@@ -208,14 +208,14 @@ class MainWindow(ttk.Window):
         # ------------------------------SIDES BACKGROUND SQUARE---------------------------------------------------------
         self.create_transparency(60, 340, 490, 550, outline='#2A9FD6', fill='black', alpha=.5)
         # --------------------------------SIDES BOXES CREATED BUT HIDDEN/8 IN TOTAL-------------------------------------
-        self.my_canvas.create_window(80, 350, anchor='nw', window=self.side_one)
-        self.my_canvas.create_window(280, 350, anchor='nw', window=self.side_two)
-        self.my_canvas.create_window(80, 400, anchor='nw', window=self.side_three)
-        self.my_canvas.create_window(280, 400, anchor='nw', window=self.side_four)
-        self.my_canvas.create_window(80, 450, anchor='nw', window=self.side_five)
-        self.my_canvas.create_window(280, 450, anchor='nw', window=self.side_six)
-        self.my_canvas.create_window(80, 500, anchor='nw', window=self.side_seven)
-        self.my_canvas.create_window(280, 500, anchor='nw', window=self.side_eight)
+        self.side_one_canvas = self.my_canvas.create_window(80, 350, anchor='nw', window=self.side_one)
+        self.side_two_canvas = self.my_canvas.create_window(280, 350, anchor='nw', window=self.side_two)
+        self.side_three_canvas = self.my_canvas.create_window(80, 400, anchor='nw', window=self.side_three)
+        self.side_four_canvas = self.my_canvas.create_window(280, 400, anchor='nw', window=self.side_four)
+        self.side_five_canvas = self.my_canvas.create_window(80, 450, anchor='nw', window=self.side_five)
+        self.side_six_canvas = self.my_canvas.create_window(280, 450, anchor='nw', window=self.side_six)
+        self.side_seven_canvas = self.my_canvas.create_window(80, 500, anchor='nw', window=self.side_seven)
+        self.side_eight_canvas = self.my_canvas.create_window(280, 500, anchor='nw', window=self.side_eight)
         # ----------------------------------------CALCULATE BUTTON------------------------------------------------------
         # @TODO: This button should be disabled until sides are entered
         self.calculate_button_window = self.my_canvas.create_window(200,
