@@ -77,3 +77,10 @@ Entry child class like ValidatedEntry and then use that whenever a validated ent
 only needed one entry field (used up to 8 times), and there is no expansion expected of the application. Creating a validate function was easier
 and made more sense for such limited use. 
 
+ttkbootstrap has a plethora of neat themes that you can use. In this application I decided to use the cyborg theme. Cyborg is a dark theme 
+with bright and bold colors. Therefore, I went with a nice bright geometry background that I set transparency on. It's bold.....
+it's bright.....it's supposed to be. 
+
+Due to the cliche of Comic Sans being a nosir in UI design......I used it. Breathe it in. Comic Sans all over the place like a 
+warm hug of awesome. 
+
