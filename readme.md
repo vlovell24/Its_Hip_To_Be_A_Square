@@ -24,44 +24,44 @@
 
 ### :art: My Design
 
-![](Hip_Main.png)
+![](readme_images/Hip_Main.png)
 
 ### :books: Non-Standard Libraries Used:
 - ttkbootstrap - A simply smashing modern library for tkinter
 - Pillow - For images n' stuff
 
 ### :question: The how-to button
-![](how_to_button.png)
+![](readme_images/how_to_button.png)
 
 - Easy Peasy Lemon Squeezy
   - Opens a how-to modal that explains how the program/application works
 
 ### :traffic_light: The Github Link Button
-![](github_link_button.png)
+![](readme_images/github_link_button.png)
 
 - Opens a link to this here Github page. 
 
 ### :card_index: Sides select dropdown and title
-![](side_select.png)
+![](readme_images/side_select.png)
 
 - Allows the user to select the amount of sides that their shape contains. Bound to 1 - 8 sides (I didn't want users to be able to select infinite sides)
 - Users cannot select 2 sides. Why? Because that is weird. One side is a circle, but two sides is a shape that I still do not understand.
 - Users cannot hand input sides. I used a combobox for this. Default value is set to 1
 
 ### :straight_ruler: Unit of Measurement Dropdown
-![](unit_measurement.png)
+![](readme_images/unit_measurement.png)
 
 - Allows the user to select a predefined unit of measurement. Set to Inches by default. User input not allowed, must select from dropdown.
 - Mixed in some metric measurements for fun......
 
 ### :straight_ruler: Side Length User Entry
-![](sides_enter.png)
+![](readme_images/sides_enter.png)
 
 - Dynamic side entry field. By default none of these entry fields appear on the application. Fields appear based on the sides selected in the 'how many sides' dropdown field.
 - Validation ignores any key that is not a number, a period, a space or a backspace key. 
 
 ### :rotating_light: Calculate Button
-![](calculate_button.png)
+![](readme_images/calculate_button.png)
 
 - When clicked, a modal pops up with geometric calculations for the shape. Default values are reset to the application
 
