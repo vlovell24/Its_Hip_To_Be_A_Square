@@ -77,6 +77,11 @@ Entry child class like ValidatedEntry and then use that whenever a validated ent
 only needed one entry field (used up to 8 times), and there is no expansion expected of the application. Creating a validate function was easier
 and made more sense for such limited use. 
 
+If you take a look at the MainWindow class, you will find an absolutely ridiculous method that serves one purpose. To get ahold of
+the transparency option of a canvas rectangle. This absurdity is what must be done in order to access the alpha parameter of
+an rbga color, so that we can set it to something less than 100%. If you need to mess with the alpha of a widget, here is how it's done.
+I am sorry. :disappointed:
+
 ttkbootstrap has a plethora of neat themes that you can use. In this application I decided to use the cyborg theme. Cyborg is a dark theme 
 with bright and bold colors. Therefore, I went with a nice bright geometry background that I set transparency on. It's bold.....
 it's bright.....it's supposed to be. 

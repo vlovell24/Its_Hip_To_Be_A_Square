@@ -67,7 +67,7 @@ class MainWindow(ttk.Window):
             text="Github Link",
             width=20,
             bootstyle='info-outline',
-            command=lambda: webbrowser.open('https://github.com/vlovell24?tab=repositories')
+            command=lambda: webbrowser.open('https://github.com/vlovell24/Its_Hip_To_Be_A_Square')
         )
         # -----------------------------------------HOW MANY SIDES COMBOBOX----------------------------------------------
         self.sides_variable = ttk.StringVar()  # to store the user selection
