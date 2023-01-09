@@ -7,6 +7,7 @@ class Modal(ttk.Toplevel):
 
     def __init__(self, title, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.title = title
         self.grab_set()  # do not allow user to click on parent application window
         # ---------------------------------REMOVE DEFAULT WINDOWS TITLE BAR---------------------------------------------
         self.overrideredirect(True)  # remove the title bar so we can customize it
@@ -27,7 +28,7 @@ class Modal(ttk.Toplevel):
         # ----------------------------------------NEW TITLE BAR---------------------------------------------------------
         self.title_text = ttk.Label(
             self.title_frame,
-            text=title,
+            text=self.title,
             font=('Comic Sans MS', 10, 'bold'),
             bootstyle='inverse-success'
         )
