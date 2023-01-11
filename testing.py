@@ -4,7 +4,6 @@ from images import BACKGROUND
 from PIL import ImageTk, Image
 from gui.modals import Modal
 import webbrowser
-
 """First window that displays when the program is opened"""
 
 
@@ -107,6 +106,8 @@ class MainWindow(ttk.Window):
                 width=30
             )
             entry.insert(END, f"Enter Length of Side {self.int_to_string_numbers[i]}")
+            entry.bind("<KeyPress>", self.key_press)
+            entry.bind("<Leave>", self.enable_start_button)
             self.side_entries.append(entry)
         # ----------------------------------LEFT MOUSE CLICK BIND-------------------------------------------------------
         # TODO: Find out why this fails in a loop. Something to do with the lambda
@@ -119,8 +120,8 @@ class MainWindow(ttk.Window):
         self.side_entries[6].bind("<1>", lambda e: self.validate_entry_field(self.side_entries[6], e))
         self.side_entries[7].bind("<1>", lambda e: self.validate_entry_field(self.side_entries[7], e))
         # ---------------------------------KEYPRESS BIND----------------------------------------------------------------
-        for index in range(8):
-            self.side_entries[index].bind("<KeyPress>", self.key_press)
+        # for index in range(8):
+        #     self.side_entries[index].bind("<Leave>", self.enable_start_button)
 
         # --------------------------------CALCULATE BUTTON ON BOTTOM OF APPLICATION-------------------------------------
         self.calculate_button = ttk.Button(
@@ -223,8 +224,7 @@ class MainWindow(ttk.Window):
         found in the tuple, then allow it to be added to the entry field. If it is NOT in the tuple, do not allow the
         keypress to be registered/created in the entry field.
         """
-        print(event.char)
-        keys = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '')
+        keys = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '')  # allowed keys
         if event.char not in keys and event.keysym != 'BackSpace':
             return 'break'
 
@@ -246,6 +246,15 @@ class MainWindow(ttk.Window):
             self.side_entries[index].insert(END, f"Enter Length of Side {self.int_to_string_numbers[index]}")
         for item in range(0, sides_selected):
             self.my_canvas.itemconfigure(self.canvas_sides[item], state='normal')   # show entry field
+
+    def enable_start_button(self, event):
+        # @TODO: Finish enabling the calculate button in the if/else statement
+        sides_selected = int(self.sides_entry_field.get())  # number of sides user selected cast to int
+        for index in range(sides_selected):
+            if "Enter Length of Side" in self.side_entries[index].get():
+                print("It's default still")
+            else:
+                print("It's good")
 
 
 if __name__ == '__main__':
