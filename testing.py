@@ -97,18 +97,19 @@ class MainWindow(ttk.Window):
                                                'Miles',
                                                'Kilometers')
         self.measurement_combobox.current(0)  # set the default/initial value
-        # ------------------------------NEW WAY TO MAKE THE ENTRIES, BIND THEM AND SET THE TEXT-------------------------
+        # ------------------------------MAKE THE ENTRIES, BIND THEM AND SET THE TEXT------------------------------------
+        # stores a reference from int to full string
         self.int_to_string_numbers = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight']
-        self.side_entries = []
-        for i in range(8):
+        self.side_entries = []  # to store all the created entry fields
+        for i in range(8):  # create eight fields by default and store them (max sides is 8)
             entry = ttk.Entry(
                 self,
                 width=30
             )
-            entry.insert(END, f"Enter Length of Side {self.int_to_string_numbers[i]}")
-            entry.bind("<KeyPress>", self.key_press)
-            entry.bind("<Leave>", self.enable_start_button)
-            self.side_entries.append(entry)
+            entry.insert(END, f"Enter Length of Side {self.int_to_string_numbers[i]}")  # default text in entries
+            entry.bind("<KeyPress>", self.key_press)  # event bind to keypress
+            entry.bind("<Leave>", self.enable_start_button)  # event bind to on leave
+            self.side_entries.append(entry)  # append to list
         # ----------------------------------LEFT MOUSE CLICK BIND-------------------------------------------------------
         # TODO: Find out why this fails in a loop. Something to do with the lambda
         self.side_entries[0].bind("<1>", lambda e: self.validate_entry_field(self.side_entries[0], e))
@@ -119,9 +120,6 @@ class MainWindow(ttk.Window):
         self.side_entries[5].bind("<1>", lambda e: self.validate_entry_field(self.side_entries[5], e))
         self.side_entries[6].bind("<1>", lambda e: self.validate_entry_field(self.side_entries[6], e))
         self.side_entries[7].bind("<1>", lambda e: self.validate_entry_field(self.side_entries[7], e))
-        # ---------------------------------KEYPRESS BIND----------------------------------------------------------------
-        # for index in range(8):
-        #     self.side_entries[index].bind("<Leave>", self.enable_start_button)
 
         # --------------------------------CALCULATE BUTTON ON BOTTOM OF APPLICATION-------------------------------------
         self.calculate_button = ttk.Button(
@@ -130,7 +128,7 @@ class MainWindow(ttk.Window):
             width=20,
             bootstyle='success-outline',
             state='disabled',  # disabled until sides are entered for all sides
-            command=lambda: Modal('Calculate Modal')
+            command=lambda: Modal('Calculate Modal')  # modal that appears on click
         )
         # **************************************************************************************************************
         #  -----------------------------------------ATTACHING TO CANVAS-------------------------------------------------
@@ -176,10 +174,11 @@ class MainWindow(ttk.Window):
         # ------------------------------SIDES BACKGROUND SQUARE---------------------------------------------------------
         self.create_transparency(60, 340, 490, 550, outline='#2A9FD6', fill='black', alpha=.5)
         # --------------------------------SIDES BOXES CREATED BUT HIDDEN/8 IN TOTAL-------------------------------------
+        # x and y coords of all the entry fields stored as a list of tuples
         self.sides_place_values = [(80, 350), (280, 350), (80, 400), (280, 400), (80, 450), (280, 450), (80, 500),
                                    (280, 500)]
         self.canvas_sides = []  # holds the canvas entries for iteration later
-        for index, entry in enumerate(self.side_entries):
+        for index, entry in enumerate(self.side_entries):  # show entry fields based on amount of sides selected
             canvas_side = self.my_canvas.create_window(self.sides_place_values[index][0],
                                                        self.sides_place_values[index][1],
                                                        anchor='nw',
@@ -189,7 +188,6 @@ class MainWindow(ttk.Window):
                 self.my_canvas.itemconfigure(canvas_side, state='hidden')
 
         # ----------------------------------------CALCULATE BUTTON------------------------------------------------------
-        # @TODO: This button should be disabled until sides are entered
         self.calculate_button_window = self.my_canvas.create_window(200,
                                                                     570,
                                                                     anchor='nw',
@@ -248,13 +246,20 @@ class MainWindow(ttk.Window):
             self.my_canvas.itemconfigure(self.canvas_sides[item], state='normal')   # show entry field
 
     def enable_start_button(self, event):
-        # @TODO: Finish enabling the calculate button in the if/else statement
+        """
+        Toggles the calculate button from disabled to normal and back again based on entry field values. If the entry
+        fields have a value that is not default, then the button will enable. If the value is default, then the button
+        is disabled
+        :param event:
+        :return: None; enables calculate button
+        """
+        # @TODO: Change this event to onchange 
         sides_selected = int(self.sides_entry_field.get())  # number of sides user selected cast to int
         for index in range(sides_selected):
-            if "Enter Length of Side" in self.side_entries[index].get():
-                print("It's default still")
+            if "Enter Length of Side" in self.side_entries[index].get() or self.side_entries[index].get() == "":
+                self.calculate_button['state'] = 'disabled'
             else:
-                print("It's good")
+                self.calculate_button['state'] = 'normal'
 
 
 if __name__ == '__main__':
