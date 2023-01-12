@@ -253,7 +253,7 @@ class MainWindow(ttk.Window):
         :param event:
         :return: None; enables calculate button
         """
-        # @TODO: Change this event to onchange 
+        # @TODO: Change this event to onchange or add additional binding to the combobox to check
         sides_selected = int(self.sides_entry_field.get())  # number of sides user selected cast to int
         for index in range(sides_selected):
             if "Enter Length of Side" in self.side_entries[index].get() or self.side_entries[index].get() == "":
