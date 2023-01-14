@@ -1,5 +1,5 @@
 import ttkbootstrap as ttk
-from images import RUBIKS, CIRCLE
+from images import RUBIKS, CIRCLE, TRIANGLE, SQUARE, RECTANGLE, PENTAGON, HEXAGON, HEPTAGON, OCTAGON
 import tkinter
 
 
@@ -50,20 +50,22 @@ class CalculateModal(Modal):
         super().__init__(*args, **kwargs)
         self.sides_variable = sides_variable
         self.shape_word = ""  # initialize the actual word value of the shape to an empty string; will set below
+        self.shape_image = ""  # shape image file to use
         self.title("Shape Calculate")
-        # create a map for values to shape names
-        self.map_sides_to_name = [('1', 'Circle'),
-                                  ('3', 'Triangle'),
-                                  ('4', 'Square'),
-                                  ('5', 'Pentagon'),
-                                  ('6', 'Hexagon'),
-                                  ('7', 'Heptagon'),
-                                  ('8', 'Octagon')]
+        # create a map for values to shape names and shape images
+        self.map_sides_to_name = [('1', 'Circle', CIRCLE),
+                                  ('3', 'Triangle', TRIANGLE),
+                                  ('4', 'Square', SQUARE),
+                                  ('5', 'Pentagon', PENTAGON),
+                                  ('6', 'Hexagon', HEXAGON),
+                                  ('7', 'Heptagon', HEPTAGON),
+                                  ('8', 'Octagon', OCTAGON)]
         for group in self.map_sides_to_name:
             if group[0] == self.sides_variable:
                 self.shape_word = group[1]  # set the value to the actual name of the shape
+                self.shape_image = group[2]  # set the image
         # ----------------------------------------IMAGE-----------------------------------------------------------------
-        self.circle_image = ttk.PhotoImage(file=CIRCLE)
+        self.image_shape = ttk.PhotoImage(file=self.shape_image)
         # ----------------------------------------TITLE LABEL-----------------------------------------------------------
         self.title_label = ttk.Label(
             self.title_frame,
@@ -75,7 +77,7 @@ class CalculateModal(Modal):
         # --------------------------------------------IMAGE LABEL-------------------------------------------------------
         self.image_label = ttk.Label(
             self.title_frame,
-            image=self.circle_image
+            image=self.image_shape
         )
         self.image_label.grid(row=1, column=0, padx=10)
         # ------------------------------------------CALCULATIONS FRAME--------------------------------------------------
