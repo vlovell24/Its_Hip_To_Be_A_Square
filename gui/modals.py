@@ -49,20 +49,25 @@ class CalculateModal(Modal):
     def __init__(self, sides_variable,  *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.sides_variable = sides_variable
+        self.shape_word = ""  # initialize the actual word value of the shape to an empty string; will set below
         self.title("Shape Calculate")
-        self.map_sides_to_name = [(1, 'Circle'),
-                                  (3, 'Triangle'),
-                                  (4, 'Square'),
-                                  (5, 'Pentagon'),
-                                  (6, 'Hexagon'),
-                                  (7, 'Heptagon'),
-                                  (8, 'Octagon')]
+        # create a map for values to shape names
+        self.map_sides_to_name = [('1', 'Circle'),
+                                  ('3', 'Triangle'),
+                                  ('4', 'Square'),
+                                  ('5', 'Pentagon'),
+                                  ('6', 'Hexagon'),
+                                  ('7', 'Heptagon'),
+                                  ('8', 'Octagon')]
+        for group in self.map_sides_to_name:
+            if group[0] == self.sides_variable:
+                self.shape_word = group[1]  # set the value to the actual name of the shape
         # ----------------------------------------IMAGE-----------------------------------------------------------------
         self.circle_image = ttk.PhotoImage(file=CIRCLE)
         # ----------------------------------------TITLE LABEL-----------------------------------------------------------
         self.title_label = ttk.Label(
             self.title_frame,
-            text="Your Shape is a Circle",
+            text=f"Your Shape is a {self.shape_word}",
             font=('Comic Sans MS', 14),
             bootstyle='primary'
         )
