@@ -49,8 +49,14 @@ class CalculateModal(Modal):
     def __init__(self, sides_variable,  *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.sides_variable = sides_variable
-        print(self.sides_variable)
         self.title("Shape Calculate")
+        self.map_sides_to_name = [(1, 'Circle'),
+                                  (3, 'Triangle'),
+                                  (4, 'Square'),
+                                  (5, 'Pentagon'),
+                                  (6, 'Hexagon'),
+                                  (7, 'Heptagon'),
+                                  (8, 'Octagon')]
         # ----------------------------------------IMAGE-----------------------------------------------------------------
         self.circle_image = ttk.PhotoImage(file=CIRCLE)
         # ----------------------------------------TITLE LABEL-----------------------------------------------------------
