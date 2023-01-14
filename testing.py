@@ -2,7 +2,7 @@ from tkinter import PhotoImage, END
 import ttkbootstrap as ttk
 from images import BACKGROUND, RUBIKS
 from PIL import ImageTk, Image
-from gui.modals import Modal, HowToModal
+from gui.modals import Modal, HowToModal, CalculateModal
 import webbrowser
 """First window that displays when the program is opened"""
 
@@ -114,7 +114,7 @@ class MainWindow(ttk.Window):
             width=20,
             bootstyle='success-outline',
             state='disabled',  # disabled until sides are entered for all sides
-            command=lambda: Modal('Calculate Modal')  # modal that appears on click
+            command=lambda: CalculateModal()  # modal that appears on click
         )
         # **************************************************************************************************************
         #  -----------------------------------------ATTACHING TO CANVAS-------------------------------------------------
