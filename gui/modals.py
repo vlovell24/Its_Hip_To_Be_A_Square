@@ -46,8 +46,10 @@ class HowToModal(Modal):
 class CalculateModal(Modal):
     """Modal to show the calculate shape screen"""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, sides_variable,  *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.sides_variable = sides_variable
+        print(self.sides_variable)
         self.title("Shape Calculate")
         # ----------------------------------------IMAGE-----------------------------------------------------------------
         self.circle_image = ttk.PhotoImage(file=CIRCLE)
@@ -105,3 +107,6 @@ class CalculateModal(Modal):
             command=lambda: self.destroy()  # TODO: Clear the fields in main screen
         )
         self.close_button.grid(row=3, column=0, ipadx=5, ipady=5, pady=(20, 10))
+
+
+

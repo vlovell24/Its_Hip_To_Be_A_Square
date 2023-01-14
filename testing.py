@@ -114,7 +114,7 @@ class MainWindow(ttk.Window):
             width=20,
             bootstyle='success-outline',
             state='disabled',  # disabled until sides are entered for all sides
-            command=lambda: CalculateModal()  # modal that appears on click
+            command=lambda: CalculateModal(self.sides_variable.get())  # modal that appears on click
         )
         # **************************************************************************************************************
         #  -----------------------------------------ATTACHING TO CANVAS-------------------------------------------------
