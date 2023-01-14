@@ -2,7 +2,7 @@ from tkinter import PhotoImage, END
 import ttkbootstrap as ttk
 from images import BACKGROUND, RUBIKS
 from PIL import ImageTk, Image
-from gui.modals import Modal
+from gui.modals import Modal, HowToModal
 import webbrowser
 """First window that displays when the program is opened"""
 
@@ -33,7 +33,7 @@ class MainWindow(ttk.Window):
         # to get the columns to stretch we have to configure the column weights in the frame
         self.title_frame.columnconfigure(0, weight=2)  # for the title
         self.title_frame.columnconfigure(1, weight=1)  # for the x button
-        
+
         # ------------------------CREATE THE CANVAS FOR THE APPLICATION-------------------------------------------------
         self.my_canvas = ttk.Canvas(self, width=450, height=550, background='red')
         self.my_canvas.pack(fill='both', expand=True)
@@ -45,7 +45,7 @@ class MainWindow(ttk.Window):
             text="How-To",
             width=20,
             bootstyle='info-outline',
-            command=lambda: Modal("How to Use Application")
+            command=lambda: HowToModal()
         )
         #  -------------------------------------------GITHUB BUTTON-----------------------------------------------------
         self.github_button = ttk.Button(
