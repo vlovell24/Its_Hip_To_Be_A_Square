@@ -1,6 +1,6 @@
 from tkinter import PhotoImage, END
 import ttkbootstrap as ttk
-from images import BACKGROUND
+from images import BACKGROUND, RUBIKS
 from PIL import ImageTk, Image
 from gui.modals import Modal
 import webbrowser
@@ -24,30 +24,16 @@ class MainWindow(ttk.Window):
         self.geometry('%dx%d+%d+%d' % (self.width, self.height, self.x, self.y))
         self.resizable(False, False)  # resize width and resize height is false
         # --------------------------TITLE, LOGO AND CENTER SCREEN-------------------------------------------------------
-        self.overrideredirect(True)  # remove the title bar so we can customize it
+        self.title("It's Hip To Be A Square")
+        self.logo = ttk.PhotoImage(file=RUBIKS)
+        self.iconphoto(False, self.logo)
         # ----------------------FRAME TO HOLD THE TITLE BAR-------------------------------------------------------------
         self.title_frame = ttk.Frame(self, bootstyle='success')
         self.title_frame.pack(fill='x')
         # to get the columns to stretch we have to configure the column weights in the frame
         self.title_frame.columnconfigure(0, weight=2)  # for the title
         self.title_frame.columnconfigure(1, weight=1)  # for the x button
-        # ----------------------------NEW TITLE BAR---------------------------------------------------------------------
-        self.title_text = ttk.Label(
-            self.title_frame,
-            text="IT'S SO HIP....",
-            font=('Comic Sans MS', 10, 'bold'),
-            bootstyle='inverse-success'
-        )
-        self.title_text.grid(row=0, column=0, padx=(20, 0), sticky='W')
-        # ------------------------------------TITLE BAR CLOSE BUTTON----------------------------------------------------
-        self.close_button = ttk.Button(
-            self.title_frame,
-            text='X',
-            width=1,
-            bootstyle='danger',
-            command=self.destroy
-        )
-        self.close_button.grid(row=0, column=1, sticky='E', padx=(0, 10), pady=(5, 5))
+        
         # ------------------------CREATE THE CANVAS FOR THE APPLICATION-------------------------------------------------
         self.my_canvas = ttk.Canvas(self, width=450, height=550, background='red')
         self.my_canvas.pack(fill='both', expand=True)
