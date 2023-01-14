@@ -9,7 +9,7 @@ class Modal(ttk.Toplevel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.grab_set()  # do not allow user to click on parent application window
-        
+
         # ------------------------CENTER SCREEN, SET SIZE, SET NO RESIZEABLE--------------------------------------------
         self.width = 400
         self.height = 500
@@ -28,6 +28,7 @@ class Modal(ttk.Toplevel):
 
 
 class HowToModal(Modal):
+    """Modal to show the how-to use application screen"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.title("Testing")
@@ -37,5 +38,20 @@ class HowToModal(Modal):
             text="HOW TO USE THIS PROGRAM",
             font=('Comic Sans MS', 14, 'bold'),
             bootstyle='info'
+        )
+        self.title_label.grid(row=0, column=0, pady=10)
+
+
+class CalculateModal(Modal):
+    """Modal to show the calculate shape screen"""
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.title("Shape Calculate")
+        # ----------------------------------------TITLE LABEL-----------------------------------------------------------
+        self.title_label = ttk.Label(
+            self.title_frame,
+            text="Your Shape is a Square",
+            font=('Comic Sans MS', 14),
+            bootstyle='primary'
         )
         self.title_label.grid(row=0, column=0, pady=10)
