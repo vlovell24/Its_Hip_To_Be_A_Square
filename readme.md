@@ -66,7 +66,7 @@
 - When clicked, a modal pops up with geometric calculations for the shape. Default values are reset to the application
 
 ## :vertical_traffic_light: Functionality Once Calculate is Clicked :vertical_traffic_light:
-Based on the amount of sides provides, the application determines the 'type' of shape that was provided. And, based on 
+Based on the amount of sides given, the application determines the 'type' of shape that was provided. And, based on 
 the length of the sides, it determines which type. For example:
 <p float="left">
 <img src="readme_images/equalTri.png" alt="equalTriangle" style="width:250px;"/>
@@ -83,6 +83,15 @@ a custom error modal will appear:
 
 
 ## :interrobang: More Information......
+This application was created on :computer: PC and is for :computer: PC. 
+
+This application uses the canvas element so that I could create a custom background. This is certainly not something you 
+would want to do, as it makes the application PC specific. Meaning, the canvas elements are placed with x and y coords. 
+Due to different monitors having different screen resolutions, this means that the coords and fixed widths will not be 
+the same depending on the Monitor dpi. So.....that means that this application will have to be modified for every single
+monitor that it is used on. An oversight on my part, that was only caught after I was nearly finished. To avoid this 
+annoying issue, do not use canvas. Just use the built-in grid, and pack in your Tkinter application.
+
 This application heavily.....actually exclusively uses the canvas element of Tkinter. Why? Well, I designed a background image
 in photoshop to be used as the background of the application. This is a no no no in Tkinter using standard placement (grid, pack, place)
 as the background of any labels that I put on top of the image would definitely not be able to be matched to the color in the 
