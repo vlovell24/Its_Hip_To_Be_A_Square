@@ -1,7 +1,8 @@
 from tkinter import END
 import math
 import ttkbootstrap as ttk
-from images import RUBIKS, CIRCLE, TRIANGLE, SQUARE, RECTANGLE, PENTAGON, HEXAGON, HEPTAGON, OCTAGON, WARNING, ISOSCELES, SCALENE
+from images import RUBIKS, CIRCLE, TRIANGLE, SQUARE, RECTANGLE, PENTAGON, HEXAGON, HEPTAGON, OCTAGON, WARNING, \
+    ISOSCELES, SCALENE
 import tkinter
 
 
@@ -128,17 +129,36 @@ class CalculateModal(Modal):
         if self.sides_variable == '1':
             self.circle_calculations(side_entries[0].get(), measurement_combobox)
         elif self.sides_variable == '3':
-            self.triangle_calculations(side_entries[0].get(),
-                                       side_entries[1].get(),
-                                       side_entries[2].get(),
-                                       measurement_combobox)
+            self.side_entries = self.convert_to_int_or_string([side_entries[0].get(),
+                                                               side_entries[1].get(),
+                                                               side_entries[2].get()])
+            self.triangle_calcs(self.side_entries, measurement_combobox)
         elif self.sides_variable == '4':
-            self.quad_calculations(side_entries[0].get(),
-                                   side_entries[1].get(),
-                                   side_entries[2].get(),
-                                   side_entries[3].get(),
+            self.square_entries = self.convert_to_int_or_string([side_entries[0].get(),
+                                           side_entries[1].get(),
+                                           side_entries[2].get(),
+                                           side_entries[3].get(),])
+            self.quad_calculations(self.square_entries,
                                    measurement_combobox
                                    )
+
+    # --------------------------------------METHODS---------------------------------------------------------------------
+    def convert_to_int_or_string(self, side_entries):
+        """
+        Converts the string data values to an int or a float if a . is found in the string.
+        :param side_entries:
+        :return: List; converted_sides
+        """
+        converted_sides = []
+        for length in side_entries:
+            if '.' in length:
+                converted_sides.append(float(length))
+            else:
+                converted_sides.append(int(length))
+        return converted_sides
+
+    def throw_incompatible_error(self):
+        pass
 
     def close_button_functionality(self, measurement_combobox, side_entries):
         """
@@ -169,20 +189,14 @@ class CalculateModal(Modal):
         self.label_2['text'] = f"Circumference: {circumference} {measurement_combobox.get()}"
         self.label_3['text'] = f"Diameter: {diameter} {measurement_combobox.get()}"
 
-    def triangle_calculations(self, side1, side2, side3, measurement_combobox):
-        sides = [side1, side2, side3]
-        converted_sides = []  # to hold converted values
-        # first convert from string to float or int
-        for length in sides:
-            if '.' in length:
-                converted_sides.append(float(length))
-            else:
-                converted_sides.append(int(length))
+    def triangle_calcs(self, side_entries, measurement_combobox):
         # get semiperimeter to use Heron's Formula
-        semiperimeter = (converted_sides[0] + converted_sides[1] + converted_sides[2]) / 2
+        semiperimeter = (side_entries[0] + side_entries[1] + side_entries[2]) / 2
         # test to see if the lengths are actually a triangle
         try:
-            area = round(math.sqrt(semiperimeter * ((semiperimeter - converted_sides[0]) * (semiperimeter - converted_sides[1]) * (semiperimeter - converted_sides[2]))), 3)
+            area = round(math.sqrt(semiperimeter * (
+                    (semiperimeter - side_entries[0]) * (semiperimeter - side_entries[1]) * (
+                    semiperimeter - side_entries[2]))), 3)
         except ValueError:  # set the error if the lengths are incompatible with a triangle
             self.image_label['image'] = self.warning_image
             self.title_label['text'] = "Error, this is NOT a Triangle!!"
@@ -191,11 +205,12 @@ class CalculateModal(Modal):
             self.label_3['text'] = "Please try again!"
             return
 
-        perimeter = round(converted_sides[0] + converted_sides[1] + converted_sides[2], 3)
+        perimeter = round(side_entries[0] + side_entries[1] + side_entries[2], 3)
         # what kind of triangle was provided
-        if side1 == side2 and side2 == side3:
+        if side_entries[0] == side_entries[1] and side_entries[1] == side_entries[2]:
             tri_type = "Equilateral Triangle"
-        elif side1 != side2 and side2 != side3 and side1 != side3:
+        elif side_entries[0] != side_entries[1] and side_entries[1] != side_entries[2] and side_entries[0] != \
+                side_entries[2]:
             tri_type = "Scalene Triangle"
             self.image_label['image'] = self.scalene_image
         else:
@@ -207,14 +222,6 @@ class CalculateModal(Modal):
         self.label_2['text'] = f"Perimeter: {perimeter} {measurement_combobox.get()}"
         self.label_3['text'] = f"Type: {tri_type}"
 
-    def quad_calculations(self, side1, side2, side3, side4, measurement_combobox):
-        sides = [side1, side2, side3, side4]
-        converted_sides = []  # to hold converted values
-        for length in sides:
-            if '.' in length:
-                converted_sides.append(float(length))
-            else:
-                converted_sides.append(int(length))
-        
-        for side in converted_sides:
+    def quad_calculations(self, square_sides, measurement_combobox):
+        for side in square_sides:
             print(type(side))
