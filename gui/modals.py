@@ -157,8 +157,19 @@ class CalculateModal(Modal):
                 converted_sides.append(int(length))
         return converted_sides
 
-    def throw_incompatible_error(self):
-        pass
+    def throw_incompatible_error(self, shape):
+        """
+        Called when a Value Error is thrown (sides were not compatible with a shape). Sets the error image, and the
+        error text in the modal.
+        :param shape: Shape that the error was called for
+        :return: None; returns out of the function
+        """
+        self.image_label['image'] = self.warning_image
+        self.title_label['text'] = f"Error, this is NOT a {shape}!!"
+        self.label_1['text'] = "These side lengths are not compatible"
+        self.label_2['text'] = f"and cannot create a {shape}"
+        self.label_3['text'] = "Please try again!"
+        return
 
     def close_button_functionality(self, measurement_combobox, side_entries):
         """
@@ -190,22 +201,29 @@ class CalculateModal(Modal):
         self.label_3['text'] = f"Diameter: {diameter} {measurement_combobox.get()}"
 
     def triangle_calcs(self, side_entries, measurement_combobox):
+        """
+        First sets the semiperimeter value to use Heron's formula to get the area of a triangle. If the formula throws
+        a value error, the error method is called which sets the labels and images. Then the method returns. If an error
+        was not thrown, the perimeter of the triangle is calculated. We then determine if each side is equal, two sides
+        are equal or no sides are equal and set the label field and image accoringly. The values of the area and
+        perimeter are set to the correct label as well.
+        :param side_entries: Each of the side entry field values in a list
+        :param measurement_combobox: The measurement value that the user selected (inch, mile, etc)
+        :return: None; sets label and image fields.
+        """
         # get semiperimeter to use Heron's Formula
         semiperimeter = (side_entries[0] + side_entries[1] + side_entries[2]) / 2
-        # test to see if the lengths are actually a triangle
-        try:
+
+        try:  # test to see if the lengths are actually a triangle
             area = round(math.sqrt(semiperimeter * (
                     (semiperimeter - side_entries[0]) * (semiperimeter - side_entries[1]) * (
                     semiperimeter - side_entries[2]))), 3)
         except ValueError:  # set the error if the lengths are incompatible with a triangle
-            self.image_label['image'] = self.warning_image
-            self.title_label['text'] = "Error, this is NOT a Triangle!!"
-            self.label_1['text'] = "These side lengths are not compatible"
-            self.label_2['text'] = "and cannot create a Triangle"
-            self.label_3['text'] = "Please try again!"
+            self.throw_incompatible_error("Triangle")
             return
 
         perimeter = round(side_entries[0] + side_entries[1] + side_entries[2], 3)
+        
         # what kind of triangle was provided
         if side_entries[0] == side_entries[1] and side_entries[1] == side_entries[2]:
             tri_type = "Equilateral Triangle"
