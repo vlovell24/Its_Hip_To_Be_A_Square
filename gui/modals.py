@@ -124,7 +124,7 @@ class CalculateModal(Modal):
             command=lambda: self.close_button_functionality(measurement_combobox, side_entries)
         )
         self.close_button.grid(row=3, column=0, ipadx=5, ipady=5, pady=(20, 10))
-        # -------------------------------UPDATE THE CALCULATIONS LABELS AFTER MODEL RENDERS-----------------------------
+        # -------------------------------UPDATE THE CALCULATIONS LABELS AFTER MODAL RENDERS-----------------------------
         if self.sides_variable == '1':
             self.circle_calculations(side_entries[0].get(), measurement_combobox)
         elif self.sides_variable == '3':
@@ -132,6 +132,13 @@ class CalculateModal(Modal):
                                        side_entries[1].get(),
                                        side_entries[2].get(),
                                        measurement_combobox)
+        elif self.sides_variable == '4':
+            self.quad_calculations(side_entries[0].get(),
+                                   side_entries[1].get(),
+                                   side_entries[2].get(),
+                                   side_entries[3].get(),
+                                   measurement_combobox
+                                   )
 
     def close_button_functionality(self, measurement_combobox, side_entries):
         """
@@ -199,3 +206,15 @@ class CalculateModal(Modal):
         self.label_1['text'] = f"Area: {area} {measurement_combobox.get()}"
         self.label_2['text'] = f"Perimeter: {perimeter} {measurement_combobox.get()}"
         self.label_3['text'] = f"Type: {tri_type}"
+
+    def quad_calculations(self, side1, side2, side3, side4, measurement_combobox):
+        sides = [side1, side2, side3, side4]
+        converted_sides = []  # to hold converted values
+        for length in sides:
+            if '.' in length:
+                converted_sides.append(float(length))
+            else:
+                converted_sides.append(int(length))
+        
+        for side in converted_sides:
+            print(type(side))
