@@ -1,7 +1,7 @@
 from tkinter import END
 import math
 import ttkbootstrap as ttk
-from images import RUBIKS, CIRCLE, TRIANGLE, SQUARE, RECTANGLE, PENTAGON, HEXAGON, HEPTAGON, OCTAGON
+from images import RUBIKS, CIRCLE, TRIANGLE, SQUARE, RECTANGLE, PENTAGON, HEXAGON, HEPTAGON, OCTAGON, WARNING, ISOSCELES
 import tkinter
 
 
@@ -69,6 +69,8 @@ class CalculateModal(Modal):
 
         # ----------------------------------------IMAGE-----------------------------------------------------------------
         self.image_shape = ttk.PhotoImage(file=self.shape_image)
+        self.warning_image = ttk.PhotoImage(file=WARNING)
+        self.isosceles_image = ttk.PhotoImage(file=ISOSCELES)
         # ----------------------------------------TITLE LABEL-----------------------------------------------------------
         self.title_label = ttk.Label(
             self.title_frame,
@@ -95,7 +97,7 @@ class CalculateModal(Modal):
         self.label_1 = ttk.Label(
             self.calculations_label_frame,
             font=('Comic Sans MS', 12),
-            bootstyle='success',
+            bootstyle='success'
         )
         self.label_1.grid(row=0, column=0, padx=10, pady=10)
 
@@ -161,7 +163,6 @@ class CalculateModal(Modal):
 
     def triangle_calculations(self, side1, side2, side3, measurement_combobox):
         sides = [side1, side2, side3]
-        type = ""
         converted_sides = []  # to hold converted values
         # first convert from string to float or int
         for length in sides:
@@ -169,23 +170,30 @@ class CalculateModal(Modal):
                 converted_sides.append(float(length))
             else:
                 converted_sides.append(int(length))
+        # get semiperimeter to use Heron's Formula
         semiperimeter = (converted_sides[0] + converted_sides[1] + converted_sides[2]) / 2
         # test to see if the lengths are actually a triangle
-        # @TODO: Create a sad face here and override everything as this is not a triangle
         try:
             area = round(math.sqrt(semiperimeter * ((semiperimeter - converted_sides[0]) * (semiperimeter - converted_sides[1]) * (semiperimeter - converted_sides[2]))), 3)
-        except ValueError:
-            area = "Not a triangle"
+        except ValueError:  # set the error if the lengths are incompatible with a triangle
+            self.image_label['image'] = self.warning_image
+            self.title_label['text'] = "Error, this is NOT a Triangle!!"
+            self.label_1['text'] = "These side lengths are not compatible"
+            self.label_2['text'] = "and cannot create a Triangle"
+            self.label_3['text'] = "Please try again!"
+            return
 
         perimeter = round(converted_sides[0] + converted_sides[1] + converted_sides[2], 3)
         # what kind of triangle was provided
         if side1 == side2 and side2 == side3:
-            type = "Equilateral Triangle"
+            tri_type = "Equilateral Triangle"
         elif side1 != side2 and side2 != side3 and side1 != side3:
-            type = "Scalene Triangle"
+            tri_type = "Scalene Triangle"
         else:
-            type = "Isoceles Triangle"
+            tri_type = "Isoceles Triangle"
+            self.image_label['image'] = self.isosceles_image
+
         # set the label values
         self.label_1['text'] = f"Area: {area} {measurement_combobox.get()}"
         self.label_2['text'] = f"Perimeter: {perimeter} {measurement_combobox.get()}"
-        self.label_3['text'] = f"Type: {type}"
+        self.label_3['text'] = f"Type: {tri_type}"
