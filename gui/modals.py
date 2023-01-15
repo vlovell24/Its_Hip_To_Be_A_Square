@@ -1,7 +1,7 @@
 from tkinter import END
 import math
 import ttkbootstrap as ttk
-from images import RUBIKS, CIRCLE, TRIANGLE, SQUARE, RECTANGLE, PENTAGON, HEXAGON, HEPTAGON, OCTAGON, WARNING, ISOSCELES
+from images import RUBIKS, CIRCLE, TRIANGLE, SQUARE, RECTANGLE, PENTAGON, HEXAGON, HEPTAGON, OCTAGON, WARNING, ISOSCELES, SCALENE
 import tkinter
 
 
@@ -71,6 +71,7 @@ class CalculateModal(Modal):
         self.image_shape = ttk.PhotoImage(file=self.shape_image)
         self.warning_image = ttk.PhotoImage(file=WARNING)
         self.isosceles_image = ttk.PhotoImage(file=ISOSCELES)
+        self.scalene_image = ttk.PhotoImage(file=SCALENE)
         # ----------------------------------------TITLE LABEL-----------------------------------------------------------
         self.title_label = ttk.Label(
             self.title_frame,
@@ -189,6 +190,7 @@ class CalculateModal(Modal):
             tri_type = "Equilateral Triangle"
         elif side1 != side2 and side2 != side3 and side1 != side3:
             tri_type = "Scalene Triangle"
+            self.image_label['image'] = self.scalene_image
         else:
             tri_type = "Isoceles Triangle"
             self.image_label['image'] = self.isosceles_image

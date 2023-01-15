@@ -65,6 +65,21 @@
 
 - When clicked, a modal pops up with geometric calculations for the shape. Default values are reset to the application
 
+## :vertical_traffic_light: Functionality Once Calculate is Clicked :vertical_traffic_light:
+Based on the amount of sides provides, the application determines the 'type' of shape that was provided. And, based on 
+the length of the sides, it determines which type. For example:
+
+<img src="readme_images/equalTri.png" alt="equalTriangle" style="width:250px;"/>
+<img src="readme_images/isocTri.png" alt="equalTriangle" style="width:250px;"/>
+<img src="readme_images/scalTri.png" alt="equalTriangle" style="width:250px;"/>
+
+In the above examples, the application determined if a triangle was an Equilateral, Isosceles, or Scalene based on the 
+length of the sides. 
+
+If a shape's sides are incompatible with the shape selected, meaning that the sides could not meet and create the shape, 
+a custom error modal will appear:
+![](readme_images/warning_screen.png)
+
 
 ## :interrobang: More Information......
 This application heavily.....actually exclusively uses the canvas element of Tkinter. Why? Well, I designed a background image
