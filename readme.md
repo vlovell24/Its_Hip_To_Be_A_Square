@@ -68,10 +68,11 @@
 ## :vertical_traffic_light: Functionality Once Calculate is Clicked :vertical_traffic_light:
 Based on the amount of sides provides, the application determines the 'type' of shape that was provided. And, based on 
 the length of the sides, it determines which type. For example:
-
+<p float="left">
 <img src="readme_images/equalTri.png" alt="equalTriangle" style="width:250px;"/>
 <img src="readme_images/isocTri.png" alt="equalTriangle" style="width:250px;"/>
 <img src="readme_images/scalTri.png" alt="equalTriangle" style="width:250px;"/>
+</p>
 
 In the above examples, the application determined if a triangle was an Equilateral, Isosceles, or Scalene based on the 
 length of the sides. 
