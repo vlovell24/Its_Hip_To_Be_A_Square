@@ -243,17 +243,20 @@ class CalculateModal(Modal):
     def quad_calculations(self, square_sides, measurement_combobox):
         unique_sides = set(square_sides)  # to determine amount of same length sides
         perimeter = 0
-        quad_type = "Square"
         for side in square_sides:
             perimeter += side
-        print(unique_sides)
         if len(unique_sides) == 1:
-            print("It's a Square or Rhombus")
+            quad_type = "Square"
+            area = square_sides[0] * square_sides[1]
         elif len(unique_sides) == 2:
-            print("It's a rectangle, parallelogram or kite")
-        elif len(unique_sides) == 3:
-            print("It's a Isosceles Trapezoid")
+            quad_type = "Rectangle or Kite"
+            area = square_sides[0] * square_sides[2]
         else:
-            print("It's a Trapezoid")
+            quad_type = "Trapezoid"
+            area = square_sides[0] * square_sides[2]
 
+        # set the label values
+        self.label_1['text'] = f"Area: {area} {measurement_combobox.get()}"
+        self.label_2['text'] = f"Perimeter: {perimeter} {measurement_combobox.get()}"
+        self.label_3['text'] = f"Type: {quad_type}"
 
