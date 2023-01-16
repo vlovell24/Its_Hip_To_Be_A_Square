@@ -223,7 +223,7 @@ class CalculateModal(Modal):
             return
 
         perimeter = round(side_entries[0] + side_entries[1] + side_entries[2], 3)
-        
+
         # what kind of triangle was provided
         if side_entries[0] == side_entries[1] and side_entries[1] == side_entries[2]:
             tri_type = "Equilateral Triangle"
@@ -241,5 +241,19 @@ class CalculateModal(Modal):
         self.label_3['text'] = f"Type: {tri_type}"
 
     def quad_calculations(self, square_sides, measurement_combobox):
+        unique_sides = set(square_sides)  # to determine amount of same length sides
+        perimeter = 0
+        quad_type = "Square"
         for side in square_sides:
-            print(type(side))
+            perimeter += side
+        print(unique_sides)
+        if len(unique_sides) == 1:
+            print("It's a Square or Rhombus")
+        elif len(unique_sides) == 2:
+            print("It's a rectangle, parallelogram or kite")
+        elif len(unique_sides) == 3:
+            print("It's a Isosceles Trapezoid")
+        else:
+            print("It's a Trapezoid")
+
+
