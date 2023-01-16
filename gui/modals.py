@@ -3,7 +3,6 @@ import math
 import ttkbootstrap as ttk
 from images import RUBIKS, CIRCLE, TRIANGLE, SQUARE, RECTANGLE, PENTAGON, HEXAGON, HEPTAGON, OCTAGON, WARNING, \
     ISOSCELES, SCALENE, TRAP
-import tkinter
 
 
 class Modal(ttk.Toplevel):

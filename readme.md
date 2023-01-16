@@ -75,7 +75,12 @@ the length of the sides, it determines which type. For example:
 </p>
 
 In the above examples, the application determined if a triangle was an Equilateral, Isosceles, or Scalene based on the 
-length of the sides. 
+length of the sides. The below examples are of a Quadrilateral
+<p float="left">
+<img src="readme_images/rectangle_calc.png" alt="rectangle" style="width:250px;"/>
+<img src="readme_images/square_calc.png" alt="square" style="width:250px;"/>
+<img src="readme_images/trapezoid.png" alt="trapezoid" style="width:250px;"/>
+</p>
 
 If a shape's sides are incompatible with the shape selected, meaning that the sides could not meet and create the shape, 
 a custom error modal will appear:
@@ -111,6 +116,9 @@ ttkbootstrap has a plethora of neat themes that you can use. In this application
 with bright and bold colors. Therefore, I went with a nice bright geometry background that I set transparency on. It's bold.....
 it's bright.....it's supposed to be. 
 
-Due to the cliche of Comic Sans being a nosir in UI design......I used it. Breathe it in. Comic Sans all over the place like a 
+Due to the cliché of Comic Sans being a nosir in UI design......I used it. Breathe it in. Comic Sans all over the place like a 
 warm hug of awesome. 
+
+And lastly, the application will currently do circles, triangles and quadrilaterals. The other shapes I have left blank 
+for the time being. If you want to use them, then you can simply add the methods as needed. 
 
