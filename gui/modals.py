@@ -2,7 +2,7 @@ from tkinter import END
 import math
 import ttkbootstrap as ttk
 from images import RUBIKS, CIRCLE, TRIANGLE, SQUARE, RECTANGLE, PENTAGON, HEXAGON, HEPTAGON, OCTAGON, WARNING, \
-    ISOSCELES, SCALENE
+    ISOSCELES, SCALENE, TRAP
 import tkinter
 
 
@@ -73,6 +73,8 @@ class CalculateModal(Modal):
         self.warning_image = ttk.PhotoImage(file=WARNING)
         self.isosceles_image = ttk.PhotoImage(file=ISOSCELES)
         self.scalene_image = ttk.PhotoImage(file=SCALENE)
+        self.rectangle_image = ttk.PhotoImage(file=RECTANGLE)
+        self.trap_image = ttk.PhotoImage(file=TRAP)
         # ----------------------------------------TITLE LABEL-----------------------------------------------------------
         self.title_label = ttk.Label(
             self.title_frame,
@@ -250,9 +252,11 @@ class CalculateModal(Modal):
             area = square_sides[0] * square_sides[1]
         elif len(unique_sides) == 2:
             quad_type = "Rectangle or Kite"
+            self.image_label['image'] = self.rectangle_image
             area = square_sides[0] * square_sides[2]
         else:
             quad_type = "Trapezoid"
+            self.image_label['image'] = self.trap_image
             area = square_sides[0] * square_sides[2]
 
         # set the label values
